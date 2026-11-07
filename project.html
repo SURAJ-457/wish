@@ -1,0 +1,730 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Happy Diwali - Lights & Happiness ✨</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+            overflow-x: hidden;
+            background:
+                radial-gradient(circle at 50% 20%, #54245f, #160b27 75%);
+            color: white;
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+
+        /* Fireworks canvas */
+
+        #fireworks {
+            position: fixed;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        /* Main container */
+
+        .container {
+            position: relative;
+            z-index: 2;
+            padding: 45px 20px 30px;
+        }
+
+        .top-text {
+            color: #ffda80;
+            letter-spacing: 5px;
+            font-size: 12px;
+            animation: fadeIn 2s ease;
+        }
+
+        /* Diya */
+
+        .diya {
+            font-size: 85px;
+            margin: 25px 0;
+            display: inline-block;
+            animation: diyaGlow 2s infinite alternate;
+        }
+
+        @keyframes diyaGlow {
+            from {
+                transform: scale(1);
+                filter: drop-shadow(0 0 10px orange);
+            }
+
+            to {
+                transform: scale(1.15);
+                filter: drop-shadow(0 0 40px gold);
+            }
+        }
+
+        /* Heading */
+
+        h1 {
+            font-size: clamp(45px, 8vw, 80px);
+            margin-bottom: 15px;
+            animation: fadeIn 2s ease;
+        }
+
+        h1 span {
+            color: #ffd45c;
+            text-shadow: 0 0 25px orange;
+        }
+
+        .subtitle {
+            color: #e7cce9;
+            font-size: 16px;
+            margin-bottom: 30px;
+        }
+
+        /* Greeting card */
+
+        .wish-card {
+            max-width: 550px;
+            margin: 30px auto;
+            padding: 40px 30px;
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 215, 100, 0.5);
+            border-radius: 20px;
+            box-shadow: 0 0 35px rgba(255, 190, 70, 0.2);
+            backdrop-filter: blur(10px);
+            animation: cardEntry 1.5s ease;
+        }
+
+        @keyframes cardEntry {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .wish-card h2 {
+            color: #ffd45c;
+            margin: 15px 0;
+        }
+
+        .wish-card p {
+            color: #f0e2f3;
+            line-height: 1.9;
+            font-size: 15px;
+        }
+
+        .wish-card h3 {
+            color: #ffd45c;
+            margin: 25px 0;
+        }
+
+        .signature {
+            color: #ffcf77;
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        /* Rotating sparkle */
+
+        .sparkle {
+            font-size: 35px;
+            color: gold;
+            animation: rotate 4s linear infinite;
+        }
+
+        @keyframes rotate {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* Button */
+
+        button {
+            padding: 16px 35px;
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            border-radius: 30px;
+            background: linear-gradient(45deg, #ff9d00, #ffe28b);
+            color: #321538;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+            box-shadow: 0 0 15px rgba(255, 190, 50, 0.3);
+        }
+
+        button:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 35px gold;
+        }
+
+        button:active {
+            transform: scale(0.95);
+        }
+
+        /* Button celebration animation */
+
+        .celebrating {
+            animation: buttonPulse 0.5s ease;
+        }
+
+        @keyframes buttonPulse {
+            50% {
+                box-shadow: 0 0 45px gold;
+            }
+        }
+
+        .footer {
+            margin-top: 30px;
+            color: #c9b4d2;
+            font-size: 13px;
+        }
+
+        /* Floating sparkles */
+
+        .particle {
+            position: fixed;
+            pointer-events: none;
+            z-index: 3;
+            color: #ffe28b;
+            animation: sparkleFloat linear forwards;
+        }
+
+        @keyframes sparkleFloat {
+            0% {
+                opacity: 0;
+                transform: translateY(0) scale(0);
+            }
+
+            30% {
+                opacity: 1;
+                transform: translateY(-30px) scale(1);
+            }
+
+            100% {
+                opacity: 0;
+                transform: translateY(-180px) scale(0);
+            }
+        }
+
+        /* Bottom decorative lights */
+
+        .bottom-lights {
+            font-size: 25px;
+            margin-top: 35px;
+            letter-spacing: 12px;
+            filter: drop-shadow(0 0 10px orange);
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        /* Mobile responsive */
+
+        @media(max-width: 600px) {
+            .container {
+                padding: 35px 15px;
+            }
+
+            .wish-card {
+                padding: 28px 18px;
+            }
+
+            .subtitle {
+                font-size: 14px;
+            }
+
+            .diya {
+                font-size: 70px;
+            }
+
+            .top-text {
+                letter-spacing: 3px;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .diya,
+            .sparkle,
+            h1,
+            .top-text,
+            .wish-card {
+                animation: none;
+            }
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <!-- Fireworks background -->
+    <canvas id="fireworks"></canvas>
+
+    <main class="container">
+
+        <div class="top-text">
+            ✨ FESTIVAL OF LIGHTS ✨
+        </div>
+
+        <div class="diya">
+            🪔
+        </div>
+
+        <h1>
+            Happy <span>Diwali</span>
+        </h1>
+
+        <p class="subtitle">
+            May your life shine with happiness and prosperity!
+        </p>
+
+        <!-- Greeting card -->
+
+        <div class="wish-card">
+
+            <div class="sparkle">✦</div>
+
+            <h2>
+                Wishing You & Your Family
+            </h2>
+
+            <p>
+                May this Diwali bring endless happiness,
+                success, love and peace into your life.
+
+                May every diya brighten your dreams
+                and every sparkle bring new hope.
+
+                May your home be filled with joy
+                and your heart with beautiful memories.
+            </p>
+
+            <h3>
+                ✨ Happy Diwali! ✨
+            </h3>
+
+            <div class="signature">
+                With love, Suraj ❤️
+            </div>
+
+        </div>
+
+        <button id="celebrateBtn">
+            Celebrate Diwali 🎆
+        </button>
+
+        <p class="footer">
+            Spread happiness. Spread light. ❤️
+        </p>
+
+        <div class="bottom-lights">
+            🪔 ✨ 🪔 ✨ 🪔
+        </div>
+
+    </main>
+
+
+    <script>
+
+        // ======================================
+        // CANVAS SETUP
+        // ======================================
+
+        const canvas = document.getElementById("fireworks");
+        const ctx = canvas.getContext("2d");
+
+        let particles = [];
+        let rockets = [];
+
+        function resizeCanvas() {
+
+            const dpr = Math.min(window.devicePixelRatio || 1, 2);
+
+            canvas.width = window.innerWidth * dpr;
+            canvas.height = window.innerHeight * dpr;
+
+            canvas.style.width = window.innerWidth + "px";
+            canvas.style.height = window.innerHeight + "px";
+
+            ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+        }
+
+        resizeCanvas();
+
+        window.addEventListener("resize", resizeCanvas);
+
+
+        // ======================================
+        // PARTICLE CLASS
+        // ======================================
+
+        class Particle {
+
+            constructor(x, y, color, speed, angle, size) {
+
+                this.x = x;
+                this.y = y;
+                this.color = color;
+
+                this.speedX = Math.cos(angle) * speed;
+                this.speedY = Math.sin(angle) * speed;
+
+                this.size = size;
+                this.alpha = 1;
+                this.gravity = 0.04;
+            }
+
+            update() {
+
+                this.x += this.speedX;
+                this.y += this.speedY;
+
+                this.speedX *= 0.98;
+                this.speedY *= 0.98;
+
+                this.speedY += this.gravity;
+
+                this.alpha -= 0.012;
+            }
+
+            draw() {
+
+                ctx.save();
+
+                ctx.globalAlpha = Math.max(0, this.alpha);
+
+                ctx.fillStyle = this.color;
+                ctx.shadowBlur = 15;
+                ctx.shadowColor = this.color;
+
+                ctx.beginPath();
+
+                ctx.arc(
+                    this.x,
+                    this.y,
+                    this.size,
+                    0,
+                    Math.PI * 2
+                );
+
+                ctx.fill();
+
+                ctx.restore();
+            }
+        }
+
+
+        // ======================================
+        // FIREWORK EXPLOSION
+        // ======================================
+
+        function createExplosion(x, y) {
+
+            const colors = [
+                "#ff3838",
+                "#ffd700",
+                "#00e5ff",
+                "#ff69b4",
+                "#ffffff",
+                "#9b59ff",
+                "#00ff99"
+            ];
+
+            const color = colors[
+                Math.floor(Math.random() * colors.length)
+            ];
+
+            // Colorful explosion
+
+            for (let i = 0; i < 100; i++) {
+
+                const angle = Math.random() * Math.PI * 2;
+                const speed = Math.random() * 6 + 1;
+
+                particles.push(
+                    new Particle(
+                        x,
+                        y,
+                        color,
+                        speed,
+                        angle,
+                        Math.random() * 3 + 1
+                    )
+                );
+            }
+
+            // Golden sparkles
+
+            for (let i = 0; i < 40; i++) {
+
+                const angle = Math.random() * Math.PI * 2;
+                const speed = Math.random() * 5 + 1;
+
+                particles.push(
+                    new Particle(
+                        x,
+                        y,
+                        "#ffd700",
+                        speed,
+                        angle,
+                        2
+                    )
+                );
+            }
+        }
+
+
+        // ======================================
+        // ROCKET CLASS
+        // ======================================
+
+        class Rocket {
+
+            constructor(x) {
+
+                this.x = x;
+                this.y = window.innerHeight;
+
+                this.targetY =
+                    Math.random() * window.innerHeight * 0.45 + 50;
+
+                this.speed = 7;
+                this.exploded = false;
+            }
+
+            update() {
+
+                this.y -= this.speed;
+
+                // Rocket trail
+
+                particles.push(
+                    new Particle(
+                        this.x,
+                        this.y + 10,
+                        "#ffd700",
+                        1,
+                        Math.PI / 2,
+                        2
+                    )
+                );
+
+                if (this.y <= this.targetY) {
+
+                    this.exploded = true;
+
+                    createExplosion(this.x, this.y);
+                }
+            }
+
+            draw() {
+
+                ctx.save();
+
+                ctx.fillStyle = "#ffffff";
+                ctx.shadowBlur = 20;
+                ctx.shadowColor = "#ffd700";
+
+                ctx.beginPath();
+
+                ctx.arc(
+                    this.x,
+                    this.y,
+                    4,
+                    0,
+                    Math.PI * 2
+                );
+
+                ctx.fill();
+
+                ctx.restore();
+            }
+        }
+
+
+        // ======================================
+        // LAUNCH ROCKET
+        // ======================================
+
+        function launchRocket() {
+
+            const x = Math.random() *
+                (window.innerWidth - 100) + 50;
+
+            rockets.push(new Rocket(x));
+        }
+
+
+        // ======================================
+        // AUTOMATIC FIREWORKS
+        // ======================================
+
+        function randomFirework() {
+
+            const x = Math.random() * window.innerWidth;
+
+            const y = Math.random() *
+                window.innerHeight * 0.5;
+
+            createExplosion(x, y);
+        }
+
+        // Automatic fireworks every 3 seconds
+
+        setInterval(randomFirework, 3000);
+
+
+        // ======================================
+        // FLOATING GOLDEN SPARKLES
+        // ======================================
+
+        function createSparkle() {
+
+            const sparkle = document.createElement("div");
+
+            sparkle.className = "particle";
+            sparkle.innerHTML = "✦";
+
+            sparkle.style.left =
+                Math.random() * 100 + "vw";
+
+            sparkle.style.top =
+                Math.random() * 100 + "vh";
+
+            sparkle.style.fontSize =
+                Math.random() * 20 + 10 + "px";
+
+            sparkle.style.animationDuration =
+                Math.random() * 2 + 2 + "s";
+
+            document.body.appendChild(sparkle);
+
+            setTimeout(() => {
+                sparkle.remove();
+            }, 4000);
+        }
+
+        setInterval(createSparkle, 250);
+
+
+        // ======================================
+        // CELEBRATE BUTTON
+        // ======================================
+
+        const celebrateBtn =
+            document.getElementById("celebrateBtn");
+
+        celebrateBtn.addEventListener("click", function () {
+
+            // Button animation
+
+            celebrateBtn.classList.remove("celebrating");
+
+            void celebrateBtn.offsetWidth;
+
+            celebrateBtn.classList.add("celebrating");
+
+            // Launch 10 rockets one after another
+
+            for (let i = 0; i < 10; i++) {
+
+                setTimeout(() => {
+                    launchRocket();
+                }, i * 250);
+            }
+
+            // Extra fireworks
+
+            for (let i = 0; i < 8; i++) {
+
+                setTimeout(() => {
+
+                    const x = Math.random() * window.innerWidth;
+
+                    const y = Math.random() *
+                        window.innerHeight * 0.5;
+
+                    createExplosion(x, y);
+
+                }, i * 350);
+            }
+
+            // Extra floating sparkles
+
+            for (let i = 0; i < 40; i++) {
+                createSparkle();
+            }
+
+        });
+
+
+        // ======================================
+        // MAIN ANIMATION LOOP
+        // ======================================
+
+        function animate() {
+
+            ctx.clearRect(
+                0,
+                0,
+                window.innerWidth,
+                window.innerHeight
+            );
+
+            // Update rockets
+
+            for (let i = rockets.length - 1; i >= 0; i--) {
+
+                rockets[i].update();
+                rockets[i].draw();
+
+                if (rockets[i].exploded) {
+                    rockets.splice(i, 1);
+                }
+            }
+
+            // Update particles
+
+            for (let i = particles.length - 1; i >= 0; i--) {
+
+                particles[i].update();
+                particles[i].draw();
+
+                if (particles[i].alpha <= 0) {
+                    particles.splice(i, 1);
+                }
+            }
+
+            requestAnimationFrame(animate);
+        }
+
+        animate();
+
+    </script>
+
+</body>
+
+</html>
